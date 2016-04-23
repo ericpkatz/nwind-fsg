@@ -25,4 +25,19 @@ describe('Employee model', function () {
         expect(Employee).to.be.a('function');
     });
 
+    describe('creating an employee named moe', function(){
+      var employee;
+      beforeEach(function(done){
+        Employee.create({ firstName: 'Moe' })
+          .then(function(_employee){
+            employee = _employee;
+            done();
+          });
+      });
+
+      it('his name is moe', function(){
+        expect(employee.firstName).to.equal('Moe');
+      }); 
+    });
+
 });
