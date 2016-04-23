@@ -29,6 +29,9 @@ describe('Employee model', function () {
       var employee;
       beforeEach(function(done){
         Employee.create({ firstName: 'Moe' })
+          .then(function(){
+            return Employee.findOne({firstName: 'Moe'});
+          })
           .then(function(_employee){
             employee = _employee;
             done();
@@ -38,6 +41,23 @@ describe('Employee model', function () {
       it('his name is moe', function(){
         expect(employee.firstName).to.equal('Moe');
       }); 
+
+      describe('#sayHello', function(){
+        var message;
+        beforeEach(function(done){
+          Employee.create({ firstName: 'Moe' })
+            .then(function(){
+              return Employee.findOne({firstName: 'Moe'});
+            })
+            .then(function(_employee){
+              message = _employee.sayHi();
+              done();
+            });
+        });
+        it('message is hi my name is Moe', function(){
+          expect(message).to.equal('Hi my name is Moe');
+        });
+      });
     });
 
 });

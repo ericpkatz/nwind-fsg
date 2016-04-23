@@ -7,5 +7,9 @@ var schema = new mongoose.Schema({
     }
 });
 
+schema.methods.sayHi = function(){
+  return 'Hi my name is ' + this.firstName;
+};
+
 
 mongoose.model('Employee', schema);
